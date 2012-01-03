@@ -3,9 +3,7 @@ require 'vendor/.composer/autoload.php';
 
 $app = new Silex\Application(); 
 $app['debug'] = true;
-$app->get('/', function() use ($app) {
-    
-});
+
 
 $app->get('/hello/{name}', function($name) use($app) { 
     return 'Hello '.$app->escape($name); 
@@ -61,6 +59,27 @@ $app->error(function (\Exception $e, $code) {
     }
 
     return new Response($message, $code);
+});
+
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options'            => array(
+        'driver'    => 'pdo_sqlite',
+        'path'      => __DIR__.'/data/app.db',
+    ),
+    'db.dbal.class_path'    => __DIR__.'/vendor/doctrine/doctrine-dbal/lib',
+    'db.common.class_path'  => __DIR__.'/vendor/doctrine/doctrine-common/lib',
+));
+
+$app->get('/', function() use ($app) {
+    
+});
+
+$app->get('/article/show/{id}', function ($id) use ($app) {
+    $sql = "SELECT * FROM article WHERE id = ?";
+    $post = $app['db']->fetchAssoc($sql, array((int) $id));
+
+    return  "<h1>{$post['title']}</h1>".
+            "<p>{$post['content']}</p>";
 });
 
 $app->run(); 

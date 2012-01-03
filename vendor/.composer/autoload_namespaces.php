@@ -15,4 +15,7 @@ return array(
     'Symfony\\Component\\BrowserKit' => $vendorDir . '/symfony/browser-kit/',
     'Silex' => $vendorDir . '/silex/silex/src/',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
+    'Doctrine\\ORM' => $vendorDir . '/doctrine/orm/lib/',
+    'Doctrine\\DBAL' => $vendorDir . '/doctrine/dbal/lib/',
+    'Doctrine\\Common' => $vendorDir . '/doctrine/common/lib/',
 );

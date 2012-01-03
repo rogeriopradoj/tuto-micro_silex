@@ -1,5 +1,6 @@
 {
     "require": {
-        "silex/silex": ">=0"
+        "silex/silex": "1.0.0-dev",
+        "doctrine/orm": "2.2-dev"
     }
 }
